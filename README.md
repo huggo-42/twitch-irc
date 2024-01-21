@@ -1,5 +1,8 @@
 # Twitch chatbot implementation
 
+Translations:
+- [Português](README_ptBR.md)
+
 # Index
 - [Configure .env](#configure-env)
 - [Building and running the chatbot](#building-and-running-the-chatbot)
@@ -12,6 +15,11 @@
 $ cp env.example .env
 ```
 - Modify `.env` according to your token, bot name and channel
+```
+TOKEN=token
+NICK=botname
+CHANNEL=channel
+```
 
 # Building and running the chatbot
 ```console
@@ -56,7 +64,9 @@ func handleHelloCommand(args string) string {
 - Declare the command name at `// available commands`
 - Add a case to the switch statement
 - Create it's handler function
-    - **MUST** return a string (that will be the message response to the chat)
+    - **MUST** return a string (that will be the **MESSAGE SENT** in the chat)
     - can receive **(args string)** as arguments
+        - text that came after the command
+        - `!hello John Doe` ➜ `args == "John Doe"`
     - signature example:
         - `func handleHelloCommand(args string) string {`

@@ -1,26 +1,28 @@
 # Implementação de um chatbot para Twitch
 
 # Índice
-- [Configurar .env](#configurar-env)
 - [Construir e rodar o chatbot](#construir-e-rodar-o-chatbot)
+- [Forneça as informações necessárias para o bot se conectar](#forneça-as-informações-necessárias-para-o-bot-se-conectar)
 - [Estrutura dos comandos](#estrutura-dos-comandos)
 - [Como adicionar novos comandos](#como-adicionar-novos-comandos)
 
-# Configurar .env
-- Copie `env.example` para `.env`
-```console
-$ cp env.example .env
-```
-- Modifique `.env` de acordo com seu token, nome do bot e canal
-```
-TOKEN=token
-NICK=botname
-CHANNEL=channel
-```
-
 # Construir e rodar o chatbot
 ```console
-$ go build -o ./bin/chatbot cmd/twitchbot/main.go && ./bin/chatbot
+$ go build -o ./bin/chatbot cmd/twitchbot/main.go
+$ ./bin/chatbot
+```
+
+# Forneça as informações necessárias para o bot se conectar
+- **token** (estará escondido)
+- **Nome do aplicativo** (App name)
+- **Canal da twich** (Twitch channel)
+```console
+$ ./bin/chatbot
+connecting to ws://irc-ws.chat.twitch.tv:80/
+Log in credentials
+Token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+App name: appName
+Twitch channel: twitchChannel
 ```
 
 # Estrutura dos comandos

@@ -4,26 +4,28 @@ Translations:
 - [Português](README_ptBR.md)
 
 # Index
-- [Configure .env](#configure-env)
 - [Building and running the chatbot](#building-and-running-the-chatbot)
+- [Provide necessary information to connect](#provide-necessary-information-to-connect)
 - [Commands structure](#commands-structure)
 - [How to add a new commands](#to-add-a-new-command)
 
-# Configure .env
-- copy the `env.example` to `.env`
-```console
-$ cp env.example .env
-```
-- Modify `.env` according to your token, bot name and channel
-```
-TOKEN=token
-NICK=botname
-CHANNEL=channel
-```
-
 # Building and running the chatbot
 ```console
-$ go build -o ./bin/chatbot cmd/twitchbot/main.go && ./bin/chatbot
+$ go build -o ./bin/chatbot cmd/twitchbot/main.go
+$ ./bin/chatbot
+```
+
+# Provide necessary information to connect
+- **token** (will be hidden)
+- **App name**
+- **Twich channel**
+```console
+$ ./bin/chatbot
+connecting to ws://irc-ws.chat.twitch.tv:80/
+Log in credentials
+Token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+App name: appName
+Twitch channel: twitchChannel
 ```
 
 # Commands structure

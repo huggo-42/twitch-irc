@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/url"
 	"os"
@@ -10,18 +11,11 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/huggo-42/twitch-irc/internal/parser"
-	"github.com/joho/godotenv"
 )
 
 var addr = flag.String("addr", "irc-ws.chat.twitch.tv:80", "http service address")
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file. Have you created one?")
-		return
-	}
-
 	flag.Parse()
 	log.SetFlags(0)
 
@@ -35,19 +29,27 @@ func main() {
 	if err != nil {
 		log.Fatal("Dial error:", err)
 	}
-	token := os.Getenv("TOKEN")
-	nick := os.Getenv("NICK")
-	channel := os.Getenv("CHANNEL")
+
+	var token string
+	var nick string
+	var channel string
+
+	log.Println("Log in credentials")
+	fmt.Print("Token: ")
+	fmt.Print("\033[8m") // Hide input
+	fmt.Scan(&token)
+	fmt.Print("\033[28m") // Show input
+
+	fmt.Print("App name: ")
+	fmt.Scan(&nick)
+
+	fmt.Print("Twitch channel: ")
+	fmt.Scan(&channel)
+
 	if token == "" || nick == "" || channel == "" {
 		log.Fatal("Error loading .env file. Have you created one as the env.example?")
 		return
 	}
-	log.Println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-	log.Println("Logging in using the following credentials")
-	log.Println("token: ", token)
-	log.Println("nick: ", nick)
-	log.Println("channel: ", channel)
-	log.Println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
 	c.WriteMessage(websocket.TextMessage, []byte(parser.PASS+" oauth:"+token))
 	c.WriteMessage(websocket.TextMessage, []byte(parser.NICK+" "+nick))
